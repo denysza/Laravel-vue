@@ -1,0 +1,36 @@
+{
+    "private": true,
+    "scripts": {
+        "dev": "npm run development",
+        "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "watch": "npm run development -- --watch",
+        "watch-poll": "npm run watch -- --watch",
+        "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --disable-host-check --config=node_modules/laravel-mix/setup/webpack.config.js",
+        "prod": "npm run production",
+        "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --config=node_modules/laravel-mix/setup/webpack.config.js"
+    },
+    "devDependencies": {
+        "axios": "^0.21.1",
+        "bootstrap": "^4.0.0",
+        "cross-env": "^7.0",
+        "es6-promise": "^4.2.8",
+        "jquery": "^3.2",
+        "laravel-echo": "^1.10.0",
+        "laravel-mix": "^6.0.18",
+        "lodash": "^4.17.19",
+        "popper.js": "^1.12",
+        "pusher-js": "^7.0.3",
+        "resolve-url-loader": "^2.3.2",
+        "sass": "^1.20.1",
+        "sass-loader": "^8.0.0",
+        "vue": "^2.6.11",
+        "vue-template-compiler": "^2.6.11",
+        "vuex": "^3.6.2"
+    },
+    "dependencies": {
+        "mdbvue": "^6.7.2",
+        "vue-loader": "^15.9.2",
+        "vue-multiselect": "^2.1.6",
+        "vue-slick-carousel": "^1.0.6"
+    }
+}

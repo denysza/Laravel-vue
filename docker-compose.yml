@@ -1,0 +1,37 @@
+version: "3"
+services:
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - db
+    ports:
+      - 10081:80
+    environment:
+      PMA_HOST: db
+      PMA_USER: dev
+      PMA_PASSWORD: dev
+  web:
+    build: ./
+    links:
+      - db
+    volumes:
+      - ./apache-conf:/etc/apache2/sites-available
+      - ./:/var/www
+    working_dir: /var/www
+    ports:
+      - 10080:80
+  node:
+    image: "node"
+    working_dir: /var/www
+    command: npm run watch-poll
+    volumes:
+      - ./:/var/www
+  db:
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: dev
+      MYSQL_DATABASE: dev
+      MYSQL_USER: dev
+      MYSQL_PASSWORD: dev
+  redis:
+    image: redis
