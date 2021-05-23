@@ -65,10 +65,6 @@ class UserController extends Controller
 
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
-        $user->name1 = $request->name1;
-        $user->name2 = $request->name2;
-        $user->message_key = md5(uniqid(rand(), true));  // チャットメッセージの発信元を特定するキー
-
         $user->save();
 
         return redirect()->route('user.complete');
@@ -147,22 +143,8 @@ class UserController extends Controller
             }
         }
 
-        $user->name1 = $request->name1;
-        $user->name2 = $request->name2;
-        $user->kana1 = $request->kana1;
-        $user->kana2 = $request->kana2;
-        $user->nickname = $request->nickname;
-        $user->postal = $request->postal;
-        $user->prefectures = $request->prefectures;
-        $user->city = $request->city;
-        $user->address1 = $request->address1;
-        $user->address2 = $request->address2;
-        $user->tel = $request->tel;
-        $user->mobile = $request->mobile;
-        $user->birth_date = $request->birth_date;
-        $user->gender = $request->gender;
+      
         $user->image_file = $filename;
-
         $user->save();
 
         return redirect()->route('user.mypage');
@@ -263,49 +245,6 @@ class UserController extends Controller
     public function detail($id)
     {
         return view(config('const.template.user.detail'), ['user' => User::find($id)]);
-    }
-
-    /**
-     * チャット画面
-     *
-     * @param  int  $painter_id
-     * @param  int  $request_id
-     * @return \Illuminate\Http\Response
-     */
-    public function chat($painter_id, $request_id)
-    {
-        $proposal = \App\Proposal::where([
-            ['painter_id', $painter_id],
-            ['request_id', $request_id],
-        ])->first();
-
-        $user_id = $this->guard()->id();
-        $status = config('const.select.status')[$proposal->status];
-        $user = User::find($user_id);
-        $message_key = $user->message_key;
-        $url = '/user/mypage';
-
-        return view(config('const.template.chat'), compact('user_id', 'painter_id', 'request_id', 'status', 'message_key', 'url'));
-    }
-
-    /**
-     * 業者検索
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function search_painter()
-    {
-        return view(config('const.template.user.search_painter'));
-    }
-
-    /**
-     * 施工事例一覧
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function construction_case_list()
-    {
-        return view(config('const.template.user.construction_case_list'));
     }
 
 }

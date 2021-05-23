@@ -102,25 +102,8 @@ class User extends Model implements Authenticatable, CanResetPassword
      * @var array
      */
     protected $fillable = [
-        'name1',
-        'name2',
-        'kana1',
-        'kana2',
-        'nickname',
-        'postal',
-        'prefectures',
-        'city',
-        'address1',
-        'address2',
-        'tel',
-        'mobile',
-        'birth_date',
-        'gender',
-        'image_file',
-        'type',
-        'expiration_date',
-        'card_info',
-        'message_key',
+        'email',
+        'image_file'
     ];
 
     /**
@@ -129,18 +112,9 @@ class User extends Model implements Authenticatable, CanResetPassword
      * @var array
      */
     protected $hidden = [
-        'password',
-        'message_key',
+        'password'
     ];
 
-    /**
-     * 会員種別のデフォルト値：0（無料会員）
-     *
-     * @var array
-     */
-    protected $attributes = [
-        'type' => 0,
-    ];
 
     /**
      * 物件
@@ -152,35 +126,6 @@ class User extends Model implements Authenticatable, CanResetPassword
         return $this->hasMany('App\Property');
     }
 
-    /**
-     * 依頼
-     *
-     * @return Request
-     */
-    public function requests()
-    {
-        return $this->hasMany('App\Request');
-    }
-
-    /**
-     * 契約
-     *
-     * @return Contract
-     */
-    public function contracts()
-    {
-        return $this->hasMany('App\Contract');
-    }
-
-    /**
-     * お気に入り業者
-     *
-     * @return Favorite
-     */
-    public function favorites()
-    {
-        return $this->hasMany('App\Favorite');
-    }
 
     /**
      * プロフィール画像URL
